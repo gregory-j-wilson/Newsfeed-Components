@@ -40,12 +40,48 @@ function menuMaker(array) {
       menu.className = 'menu';
     
     const menuUL = document.createElement('ul');
-
-    const menuLI = document.querySelector('li');
-       menuLI.textContent = array;
+    
+    menu.appendChild(menuUL);
 
     array.forEach( element => {
-      menuLI.createElement()
+      const menuLI = document.createElement('li');
+      menuLI.textContent = element;
+      menuUL.appendChild(menuLI)
+      
       
     });
+
+    const menuButton = document.querySelector('.menu-button');
+
+    menuButton.addEventListener('click', event => {
+      if (menu.classList.contains('menu--open')) {
+        menu.classList.remove('menu--open')
+        menu.classList.add('menu--close')
+      } else if (!menu.classList.contains('menu--open')) {
+        menu.classList.add('menu--open')
+        menu.classList.remove('menu--close');
+      }
+    })
+
+    
+
+    
+
+    console.log(menuUL)
+    return menu
+
+    
 }
+
+
+const header = document.querySelector("body > div.header")
+
+header.appendChild(menuMaker(menuItems))
+
+
+
+
+
+
+
+
