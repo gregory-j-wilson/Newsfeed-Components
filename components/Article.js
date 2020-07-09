@@ -85,7 +85,27 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Doing Components I',
+    date: 'Jul 8th, 2020',
+    firstParagraph: `I'm learning lots about changing the DOM with javascript.`,
+
+    secondParagraph: `Then you can change the dom when the user does something, like clicks.`,
+
+    thirdParagraph: `And then with component functions, you can import in data to your website and style it and make it look nice, like in this example with multiple articles being generated.`
+  },
+
+  {
+    title: 'Random Stuff',
+    date: 'Jul 8th, 2020',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elit erat, mollis sit amet hendrerit at, pellentesque a neque. Morbi maximus aliquam tincidunt. Aenean molestie odio molestie quam feugiat lacinia. Nulla dictum ante mi, bibendum maximus leo vehicula quis. Etiam vel pretium ligula. In interdum feugiat sapien ac suscipit. Vivamus quis sagittis mi. Maecenas eu lorem et tortor facilisis posuere ut volutpat mauris. Duis faucibus porta ornare. Nullam nec sodales nunc..`,
+
+    secondParagraph: `Quisque non orci orci. Cras leo lorem, cursus in tortor nec, commodo vehicula elit. Proin vitae turpis a nibh fringilla efficitur. Ut erat orci, blandit in elit non, scelerisque tincidunt mi. Nunc auctor dolor non urna suscipit malesuada. Vestibulum elit massa, ullamcorper id libero eget, tristique ultricies orci. Nulla bibendum auctor tellus, id vulputate mi pulvinar eu. Aliquam erat volutpat. Aenean lacinia sodales diam, non sagittis lorem rhoncus ac. Duis ac laoreet lectus. Donec tincidunt tellus nibh, in consequat quam ultricies a. Aenean maximus risus ac leo condimentum faucibus. Donec sodales odio at volutpat dictum. Mauris tempor, nisl eu auctor tincidunt, ligula sem dapibus lacus, nec pharetra dolor nisl et mi.`,
+
+    thirdParagraph: `Duis ut fringilla nisi. Cras pretium tortor et volutpat lobortis. Nulla in vulputate massa. In vulputate ipsum aliquet tortor facilisis, a tristique ligula fermentum. Etiam viverra urna nec ante tempus rutrum. Quisque et ultrices enim. Vivamus id fermentum odio, sit amet efficitur dui. Phasellus arcu quam, imperdiet quis nibh quis, porta tristique nisi. Quisque ut dolor sapien. Nullam in euismod nisi, at pellentesque tortor.`
   }
+
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
@@ -111,3 +131,51 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+const articleContainer = document.querySelector('.articles');
+
+
+function articleMaker(oneArticle) {
+  
+    const article = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+        articleTitle.textContent = oneArticle.title;
+
+    const articleDate = document.createElement('p');
+        articleDate.className = 'date';
+        articleDate.textContent = oneArticle.date;
+
+    const firstPara = document.createElement('p');
+        firstPara.textContent = oneArticle.firstParagraph;
+
+    const secondPara = document.createElement('p');
+        secondPara.textContent = oneArticle.secondParagraph;
+
+    const thirdPara = document.createElement('p');
+        thirdPara.textContent = oneArticle.thirdParagraph;
+
+    const expand = document.createElement('span');
+        expand.className = 'expandButton';
+        expand.textContent = '+';
+
+        expand.addEventListener('click', (event) => {
+            article.classList.toggle('article-open')
+        })
+
+       
+    articleContainer.appendChild(article);
+    article.appendChild(articleTitle);
+    article.appendChild(articleDate);
+    article.appendChild(firstPara);
+    article.appendChild(secondPara);
+    article.appendChild(thirdPara);
+    article.appendChild(expand);
+
+    return article
+
+}
+
+data.forEach( object => {
+     const actualArticles = articleMaker(object);
+     articleContainer.appendChild(actualArticles) 
+})
